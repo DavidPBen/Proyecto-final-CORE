@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blog</title>
+	<link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<header class="main" id="mainHeader">
+	Blog
+</header>
+<nav>
+	<ul>
+		<li><button><a href="/">Vista Index</a></button></li>
+		<li><button><a href="/author">Vista Author</a></button></li>
+		<li><button><a href="/posts">Posts</a></button></li>
+		<% if (locals.loginUser && locals.loginUser.isAdmin) { %>
+			<li><button><a href="/users">Users</a></button></li>
+		<% } %>
+	</ul>
+</nav>
+
+<h2>Contador de peticiones HTTP</h2>
+<% var contador = "<strong>" + locals.contadorPeticionesHTTP + "</strong>" %>
+<h3>Contador peticiones HTTP: <%- contador %></h3>
+
+
+<%- body %>
+
+<div>
+    <% if (!locals.loginUser) { %>
+        <a href="/login">Login</a>
+    <% } else { %>
+        <a href="/users/<%= loginUser.id %>"><%= loginUser.username %></a>
+        <a href="/login?_method=DELETE">Logout</a>
+    <% } %>
+	<% if(messages.error) { %>
+		<ul>
+		<% for(mensaje of messages.error) { %>
+			<li><%- mensaje %></li>
+		<% } %>
+		</ul>
+	<% } %>
+	<% if(messages.info) { %>
+		<article class="mensajeFlash info">...</article>
+	<% } %>
+</div>
+
+<a href="/users/new" class="button">Create new user</a>
+	
+<footer>1</footer>
+</body>
+</html>

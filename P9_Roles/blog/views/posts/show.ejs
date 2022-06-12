@@ -1,0 +1,25 @@
+<section>
+<article class="postShow">
+
+<h1>
+    Show Post:
+</h1>
+
+<% include ../attachments/_attachment %>
+<div>
+    <small id="author"> by <%= post.author?.username ?? "Anonymous" %> </small>
+</div>
+
+<ul>
+    <li>Title: <b><%= post.title %></b></li>
+    <li>Body: <b><%= post.body %></b></li>
+</ul>
+
+<% if (locals.loginUser && locals.loginUser.isAdmin){ %>
+    <a href="/post/:postId(\\d+)/edit">Edit</a>
+<% } %>
+
+<a href="/posts" class="button">Go back</a>
+
+</article>
+</section>
